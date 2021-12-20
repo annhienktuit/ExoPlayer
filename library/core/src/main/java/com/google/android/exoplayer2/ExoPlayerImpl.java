@@ -1531,6 +1531,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
       int startWindowIndex,
       long startPositionMs,
       boolean resetToDefaultPosition) {
+    Long currentTime = System.currentTimeMillis();
     int currentWindowIndex = getCurrentWindowIndexInternal();
     long currentPositionMs = getCurrentPosition();
     pendingOperationAcks++;
@@ -1538,12 +1539,14 @@ import java.util.concurrent.CopyOnWriteArraySet;
       removeMediaSourceHolders(
           /* fromIndex= */ 0, /* toIndexExclusive= */ mediaSourceHolderSnapshots.size());
     }
+
     List<MediaSourceList.MediaSourceHolder> holders =
         addMediaSourceHolders(/* index= */ 0, mediaSources);
     Timeline timeline = createMaskingTimeline();
     if (!timeline.isEmpty() && startWindowIndex >= timeline.getWindowCount()) {
       throw new IllegalSeekPositionException(timeline, startWindowIndex, startPositionMs);
     }
+
     // Evaluate the actual start position.
     if (resetToDefaultPosition) {
       startWindowIndex = timeline.getFirstWindowIndex(shuffleModeEnabled);
@@ -1583,6 +1586,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
         Player.DISCONTINUITY_REASON_REMOVE,
         /* discontinuityWindowStartPositionUs= */ getCurrentPositionUsInternal(newPlaybackInfo),
         /* ignored */ C.INDEX_UNSET);
+    Log.i("Set mediaSource duration ", Long.toString(System.currentTimeMillis() - currentTime));
   }
 
   private List<MediaSourceList.MediaSourceHolder> addMediaSourceHolders(

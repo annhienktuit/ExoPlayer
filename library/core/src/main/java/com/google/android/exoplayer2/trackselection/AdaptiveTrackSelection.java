@@ -798,6 +798,7 @@ public class AdaptiveTrackSelection extends BaseTrackSelection {
       if (builder == null) {
         continue;
       }
+      Log.i(TAG, "Current bandwidth is " + checkpointBitrates[i]);
       builder.add(
           new AdaptationCheckpoint(
               /* totalBandwidth= */ totalBitrate, /* allocatedBandwidth= */ checkpointBitrates[i]));

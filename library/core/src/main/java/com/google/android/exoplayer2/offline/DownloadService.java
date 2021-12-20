@@ -928,7 +928,7 @@ public abstract class DownloadService extends Service {
     private final boolean foregroundAllowed;
     @Nullable private final Scheduler scheduler;
     private final Class<? extends DownloadService> serviceClass;
-
+    Long startDownloadTimeInMs;
     @Nullable private DownloadService downloadService;
     private @MonotonicNonNull Requirements scheduledRequirements;
 
@@ -1012,6 +1012,7 @@ public abstract class DownloadService extends Service {
 
     @Override
     public void onInitialized(DownloadManager downloadManager) {
+      startDownloadTimeInMs = System.currentTimeMillis();
       if (downloadService != null) {
         downloadService.notifyDownloads(downloadManager.getCurrentDownloads());
       }
@@ -1020,6 +1021,7 @@ public abstract class DownloadService extends Service {
     @Override
     public void onDownloadChanged(
         DownloadManager downloadManager, Download download, @Nullable Exception finalException) {
+      Log.i(TAG,"onDownloadChanged");
       if (downloadService != null) {
         downloadService.notifyDownloadChanged(download);
       }
@@ -1036,6 +1038,7 @@ public abstract class DownloadService extends Service {
     @Override
     public void onDownloadRemoved(DownloadManager downloadManager, Download download) {
       if (downloadService != null) {
+        Log.i(TAG,"onDownloadRemoved");
         downloadService.notifyDownloadRemoved();
       }
     }

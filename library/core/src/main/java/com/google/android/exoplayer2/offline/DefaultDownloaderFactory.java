@@ -15,6 +15,7 @@
  */
 package com.google.android.exoplayer2.offline;
 
+import android.util.Log;
 import android.util.SparseArray;
 import androidx.annotation.Nullable;
 import com.google.android.exoplayer2.C;
@@ -27,7 +28,7 @@ import java.util.concurrent.Executor;
 
 /**
  * Default {@link DownloaderFactory}, supporting creation of progressive, DASH, HLS and
- * SmoothStreaming downloaders. Note that for the latter three, the corresponding library module
+ * SmoothStreaming downloader. Note that for the latter three, the corresponding library module
  * must be built into the application.
  */
 public class DefaultDownloaderFactory implements DownloaderFactory {

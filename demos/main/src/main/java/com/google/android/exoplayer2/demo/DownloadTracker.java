@@ -111,6 +111,7 @@ public class DownloadTracker {
       FragmentManager fragmentManager, MediaItem mediaItem, RenderersFactory renderersFactory) {
     @Nullable Download download = downloads.get(checkNotNull(mediaItem.localConfiguration).uri);
     if (download != null && download.state != Download.STATE_FAILED) {
+      Log.i(TAG,"Download Failed");
       DownloadService.sendRemoveDownload(
           context, DemoDownloadService.class, download.request.id, /* foreground= */ false);
     } else {
@@ -353,6 +354,7 @@ public class DownloadTracker {
     }
 
     private void startDownload(DownloadRequest downloadRequest) {
+      Log.i(TAG, "Start download");
       DownloadService.sendAddDownload(
           context, DemoDownloadService.class, downloadRequest, /* foreground= */ false);
     }

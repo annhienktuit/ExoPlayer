@@ -15,6 +15,8 @@
  */
 package com.google.android.exoplayer2.offline;
 
+import android.nfc.Tag;
+import android.util.Log;
 import androidx.annotation.Nullable;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.MediaItem;
@@ -87,6 +89,7 @@ public final class ProgressiveDownloader implements Downloader {
   @Override
   public void download(@Nullable ProgressListener progressListener)
       throws IOException, InterruptedException {
+    Log.i("ProgressiveDownloader ","Start at " + System.currentTimeMillis());
     this.progressListener = progressListener;
     downloadRunnable =
         new RunnableFutureTask<Void, IOException>() {

@@ -18,6 +18,7 @@ package com.google.android.exoplayer2.offline;
 import static com.google.android.exoplayer2.util.Assertions.checkNotNull;
 
 import android.net.Uri;
+import android.util.Log;
 import androidx.annotation.Nullable;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.MediaItem;

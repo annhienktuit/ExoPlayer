@@ -17,7 +17,9 @@ package com.google.android.exoplayer2.trackselection;
 
 import static java.lang.Math.max;
 
+import android.nfc.Tag;
 import android.os.SystemClock;
+import android.util.Log;
 import androidx.annotation.Nullable;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.Format;
@@ -79,6 +81,9 @@ public abstract class BaseTrackSelection implements ExoTrackSelection {
     this.tracks = new int[length];
     for (int i = 0; i < length; i++) {
       this.tracks[i] = group.indexOf(formats[i]);
+      if(formats[i].sampleMimeType != null){
+        Log.i("TrackSelection ",formats[i].sampleMimeType);
+      }
     }
     excludeUntilTimes = new long[length];
   }

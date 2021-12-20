@@ -15,6 +15,7 @@
  */
 package com.google.android.exoplayer2.upstream.cache;
 
+import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 import com.google.android.exoplayer2.C;

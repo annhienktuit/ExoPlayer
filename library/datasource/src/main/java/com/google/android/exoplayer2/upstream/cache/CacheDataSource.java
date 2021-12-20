@@ -20,6 +20,7 @@ import static com.google.android.exoplayer2.util.Util.castNonNull;
 import static java.lang.Math.min;
 
 import android.net.Uri;
+import android.util.Log;
 import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
 import com.google.android.exoplayer2.C;
@@ -555,6 +556,7 @@ public final class CacheDataSource implements DataSource {
   @Override
   public long open(DataSpec dataSpec) throws IOException {
     try {
+      Log.i("cacheDataSource ","Open at " + Long.toString(System.currentTimeMillis()));
       String key = cacheKeyFactory.buildCacheKey(dataSpec);
       DataSpec requestDataSpec = dataSpec.buildUpon().setKey(key).build();
       this.requestDataSpec = requestDataSpec;
@@ -658,6 +660,7 @@ public final class CacheDataSource implements DataSource {
     actualUri = null;
     readPosition = 0;
     notifyBytesRead();
+    Log.i("cacheDataSource ","Close at " + Long.toString(System.currentTimeMillis()));
     try {
       closeCurrentSource();
     } catch (Throwable e) {
@@ -682,6 +685,7 @@ public final class CacheDataSource implements DataSource {
    *     reading from {@link #upstreamDataSource}, which is the currently open source.
    */
   private void openNextSource(DataSpec requestDataSpec, boolean checkCache) throws IOException {
+    Log.i("cacheDataSource ","Open next source at " + Long.toString(System.currentTimeMillis()));
     @Nullable CacheSpan nextSpan;
     String key = castNonNull(requestDataSpec.key);
     if (currentRequestIgnoresCache) {

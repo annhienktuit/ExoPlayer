@@ -190,7 +190,6 @@ public final class DownloadManager {
   private boolean waitingForRequirements;
   private List<Download> downloads;
   private RequirementsWatcher requirementsWatcher;
-
   /**
    * Constructs a {@link DownloadManager}.
    *
